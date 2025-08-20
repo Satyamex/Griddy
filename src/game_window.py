@@ -5,6 +5,8 @@ pygame.init()
 
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 420
+X_LIMIT = (0, 600)
+Y_LIMIT = (0, 380)
 
 game_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 game_clock = pygame.time.Clock()
@@ -35,8 +37,11 @@ while game_running:
     # RENDER YOUR GAME HERE
     player = pygame.draw.rect(game_screen, player_instanced.player_color, (player_instanced.player_pos_x, player_instanced.player_pos_y, player_instanced.player_scale_x, player_instanced.player_scale_y))
 
+    #Debug
+    print(player_instanced.player_pos_x)
+
     # flip() the display to put your work on screen
     pygame.display.flip()
-    game_clock.tick(60)  # limits FPS to 60
+    game_clock.tick(12)  # limits FPS to 60
 
 pygame.quit()
