@@ -1,12 +1,16 @@
-import pygame, player as player_class
+import pygame, player as player_class, random
 
 # pygame setup
 pygame.init()
 
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 420
-X_LIMIT = (0, 600)
-Y_LIMIT = (0, 380)
+
+LIMIT_OFFSET = 10
+X_LIMIT_MIN = 0 + LIMIT_OFFSET
+X_LIMIT_MAX = 600 - LIMIT_OFFSET
+Y_LIMIT_MIN = 0 + LIMIT_OFFSET
+Y_LIMIT_MAX = 380 - LIMIT_OFFSET
 
 game_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 game_clock = pygame.time.Clock()
@@ -21,13 +25,13 @@ while game_running:
         if event.type == pygame.QUIT:
             game_running = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_w and player_instanced.player_pos_y >= Y_LIMIT_MIN:
                 player_instanced.move_player_from_input("w")
-            elif event.key == pygame.K_s:
+            elif event.key == pygame.K_s and player_instanced.player_pos_y <= Y_LIMIT_MAX:
                 player_instanced.move_player_from_input("s")
-            elif event.key == pygame.K_d:
+            elif event.key == pygame.K_d and player_instanced.player_pos_x <= X_LIMIT_MAX:
                 player_instanced.move_player_from_input("d")
-            elif event.key == pygame.K_a:
+            elif event.key == pygame.K_a  and player_instanced.player_pos_x >= X_LIMIT_MIN:
                 player_instanced.move_player_from_input("a")
 
 
