@@ -47,13 +47,13 @@ while game_running:
         if event.type == pygame.QUIT:
             game_running = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w and player_instanced.player_pos_y >= Y_LIMIT_MIN:
+            if (event.key == pygame.K_w or event.key == pygame.K_UP) and player_instanced.player_pos_y >= Y_LIMIT_MIN:
                 player_instanced.move_player_from_input("w")
-            elif event.key == pygame.K_s and player_instanced.player_pos_y <= Y_LIMIT_MAX:
+            elif (event.key == pygame.K_s or event.key == pygame.K_DOWN) and player_instanced.player_pos_y <= Y_LIMIT_MAX:
                 player_instanced.move_player_from_input("s")
-            elif event.key == pygame.K_d and player_instanced.player_pos_x <= X_LIMIT_MAX:
+            elif (event.key == pygame.K_d or event.key == pygame.K_RIGHT) and player_instanced.player_pos_x <= X_LIMIT_MAX:
                 player_instanced.move_player_from_input("d")
-            elif event.key == pygame.K_a  and player_instanced.player_pos_x >= X_LIMIT_MIN:
+            elif (event.key == pygame.K_a or event.key == pygame.K_LEFT) and player_instanced.player_pos_x >= X_LIMIT_MIN:
                 player_instanced.move_player_from_input("a")
 
     # fill the screen with a color to wipe away anything from last frame
@@ -82,6 +82,6 @@ while game_running:
 
     # flip() the display to put your work on screen
     pygame.display.flip()
-    game_clock.tick(8)  # limits FPS to 8 frames per second
+    game_clock.tick(24)  # limits FPS to 24 frames per second
 
 pygame.quit()
