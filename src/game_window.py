@@ -45,15 +45,23 @@ while game_running:
     # fill the screen with a color to wipe away anything from last frame
     game_screen.fill((0, 0, 0))
 
+    # PRE_RENDER setup
+    player_to_spawn = (player_instanced.player_pos_x, player_instanced.player_pos_y, player_instanced.player_scale_x, player_instanced.player_scale_y)
+    score_point_to_spawn = (x_rand_pos, y_rand_pos, score_point.scale_x, score_point.scale_y)
+
     # RENDER YOUR GAME HERE
-    player = pygame.draw.rect(game_screen, player_instanced.player_color, (player_instanced.player_pos_x, player_instanced.player_pos_y, player_instanced.player_scale_x, player_instanced.player_scale_y))
-    pygame.draw.rect(game_screen, score_point.color, (x_rand_pos, y_rand_pos, score_point.scale_x, score_point.scale_y))
+    player_spawned = pygame.draw.rect(game_screen, player_instanced.player_color, player_to_spawn)
+    score_point_spawned = pygame.draw.rect(game_screen, score_point.color, score_point_to_spawn)
+
+    # Collision detection
+    if player_spawned.colliderect(score_point_spawned):
+        player_instanced.increase_score()
 
     # Debug
     # print(player_instanced.player_pos_x)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
-    game_clock.tick(12)  # limits FPS to 12
+    game_clock.tick(8)  # limits FPS to 8 frames per second
 
 pygame.quit()

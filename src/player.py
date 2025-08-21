@@ -22,3 +22,4 @@ class player:
     
     def increase_score(self):
          self.score += 1
+         print(self.score)
