@@ -37,6 +37,10 @@ coverage/
 *.coverage
 *.cov
 htmlcov/
+build/
+.html
+.tex
+*.spec
 
 # VS Code (keep project settings, ignore everything else)
 .vscode/*
