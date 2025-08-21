@@ -15,6 +15,8 @@ Y_LIMIT_MAX = 380 - LIMIT_OFFSET
 score_point_xpos = 0
 score_point_ypos = 0
 
+score_text_font = pygame.font.Font(None, 36)
+
 pygame.display.set_caption("Griddy!")
 game_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 game_clock = pygame.time.Clock()
