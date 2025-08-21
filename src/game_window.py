@@ -15,14 +15,12 @@ Y_LIMIT_MAX = 380 - LIMIT_OFFSET
 score_point_xpos = 0
 score_point_ypos = 0
 
-score_text_font = pygame.font.Font(None, 36)
-
 pygame.display.set_caption("Griddy!")
 game_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 game_clock = pygame.time.Clock()
 game_running = True
 
-# instancing shit
+# instancing stuff
 player_instanced = player_class.player(SCREEN_WIDTH, SCREEN_HEIGHT)
 score_point = scorepoint.score_point()
 
@@ -64,10 +62,14 @@ while game_running:
     # PRE_RENDER setup
     player_to_spawn = (player_instanced.player_pos_x, player_instanced.player_pos_y, player_instanced.player_scale_x, player_instanced.player_scale_y)
     score_point_to_spawn = (score_point_xpos, score_point_ypos, score_point.scale_x, score_point.scale_y)
+    score_text_font = pygame.font.Font(None, 60)
+    score_text_surface = score_text_font.render(str(player_instanced.score), True, (255, 255, 255))
+    score_text_rect = score_text_surface.get_rect(center=(40, 40)) 
 
     # RENDER YOUR GAME HERE
     player_spawned = pygame.draw.rect(game_screen, player_instanced.player_color, player_to_spawn)
     score_point_spawned = pygame.draw.rect(game_screen, score_point.color, score_point_to_spawn)
+    game_screen.blit(score_text_surface, score_text_rect)
 
     # Collision detection
     if player_spawned.colliderect(score_point_spawned):
