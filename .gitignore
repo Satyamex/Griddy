@@ -38,11 +38,6 @@ coverage/
 *.cov
 htmlcov/
 
-# Pygame / PyInstaller build artifacts
-build/
-dist/
-*.spec
-
 # VS Code (keep project settings, ignore everything else)
 .vscode/*
 !.vscode/settings.json
