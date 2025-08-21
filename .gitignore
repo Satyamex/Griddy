@@ -36,33 +36,14 @@ coverage/
 *.cover
 *.coverage
 *.cov
-*.log
 htmlcov/
 
-# C++
-*.o
-*.obj
-*.so
-*.dll
-*.exe
-*.out
-*.a
-*.lib
-*.i
-*.ii
-*.s
-*.su
-*.idb
-*.pdb
-*.mod
-*.cmd
-*.exp
-*.ilk
-*.d
-*.dSYM/
-*.vcxproj.user
+# Pygame / PyInstaller build artifacts
+build/
+dist/
+*.spec
 
-# VS Code
+# VS Code (keep project settings, ignore everything else)
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -72,24 +53,3 @@ htmlcov/
 .history/
 .localhistory/
 .vshistory/
-
-# Build directories
-bin/
-obj/
-build/
-Build/
-[Bb]uild/
-dist/
-Debug/
-Release/
-x64/
-x86/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-[Bb]ld/
-artifacts/
-logs/
-log/
-
-# Node (in case of JS helpers for Python/C++)
-node_modules/
