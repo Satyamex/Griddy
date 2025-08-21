@@ -1,4 +1,4 @@
-import pygame, player as player_class, random, score_point as scorepoint, score_point_spawner, utilities
+import pygame, player as player_class, score_point as scorepoint, utilities, random
 
 # pygame setup
 pygame.init()
@@ -12,10 +12,8 @@ X_LIMIT_MAX = 600 - LIMIT_OFFSET
 Y_LIMIT_MIN = 0 + LIMIT_OFFSET
 Y_LIMIT_MAX = 380 - LIMIT_OFFSET
 
-x_rand_pos = random.randint(X_LIMIT_MIN, X_LIMIT_MAX)
-y_rand_pos = random.randint(Y_LIMIT_MIN, Y_LIMIT_MAX)
-x_rand_pos = utilities.snap_according_to_game_grid(x_rand_pos)
-y_rand_pos = utilities.snap_according_to_game_grid(y_rand_pos)
+score_point_xpos = 0
+score_point_ypos = 0
 
 pygame.display.set_caption("Griddy!")
 game_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -25,6 +23,22 @@ game_running = True
 # instancing shit
 player_instanced = player_class.player(SCREEN_WIDTH, SCREEN_HEIGHT)
 score_point = scorepoint.score_point()
+
+# Temp utilities
+def get_random_score_position_x():
+    global score_point_xpos
+    x_rand_pos = random.randint(X_LIMIT_MIN, X_LIMIT_MAX)
+    x_rand_pos = utilities.snap_according_to_game_grid(x_rand_pos)
+    score_point_xpos = x_rand_pos
+
+def get_random_score_position_y():
+    global score_point_ypos
+    y_rand_pos = random.randint(Y_LIMIT_MIN, Y_LIMIT_MAX)
+    y_rand_pos = utilities.snap_according_to_game_grid(y_rand_pos)
+    score_point_ypos = y_rand_pos
+
+get_random_score_position_x()
+get_random_score_position_y()
 
 while game_running:
 
@@ -47,7 +61,7 @@ while game_running:
 
     # PRE_RENDER setup
     player_to_spawn = (player_instanced.player_pos_x, player_instanced.player_pos_y, player_instanced.player_scale_x, player_instanced.player_scale_y)
-    score_point_to_spawn = (x_rand_pos, y_rand_pos, score_point.scale_x, score_point.scale_y)
+    score_point_to_spawn = (score_point_xpos, score_point_ypos, score_point.scale_x, score_point.scale_y)
 
     # RENDER YOUR GAME HERE
     player_spawned = pygame.draw.rect(game_screen, player_instanced.player_color, player_to_spawn)
@@ -56,6 +70,8 @@ while game_running:
     # Collision detection
     if player_spawned.colliderect(score_point_spawned):
         player_instanced.increase_score()
+        get_random_score_position_x()
+        get_random_score_position_y()
 
     # Debug
     # print(player_instanced.player_pos_x)
